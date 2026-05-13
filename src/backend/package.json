@@ -1,0 +1,13 @@
+{
+  "name": "techsolutions-academic-events-backend",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "dependencies": {
+    "express": "^4.18.0"
+  }
+}
