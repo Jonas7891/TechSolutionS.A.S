@@ -2,40 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { LoginPage } from './features/login';
+import { DashboardPage } from './pages/DashboardPage';
 import { useAuth } from './hooks/useAuth';
 import './styles/global.css';
-
-function Dashboard() {
-  const { user, logout } = useAuth();
-
-  return (
-    <div className="app-container">
-      <header>
-        <div className="header-content">
-          <h1>TechSolutions - Gestión de Eventos Académicos</h1>
-          <div className="header-user">
-            <span>Usuario: {user?.name}</span>
-            <button className="logout-button" onClick={logout}>
-              Cerrar Sesión
-            </button>
-          </div>
-        </div>
-      </header>
-      <main>
-        <p>Bienvenido al panel de administración de eventos académicos.</p>
-        <div className="dashboard-content">
-          <h2>Próximas funcionalidades:</h2>
-          <ul>
-            <li>📅 Gestión de eventos académicos</li>
-            <li>👥 Administración de usuarios</li>
-            <li>📊 Reportes y estadísticas</li>
-            <li>🎯 Asignación de recursos</li>
-          </ul>
-        </div>
-      </main>
-    </div>
-  );
-}
 
 function ProtectedRoute({ children }) {
   const { isAuthenticated } = useAuth();
@@ -60,7 +29,7 @@ function AppContent() {
         path="/"
         element={
           <ProtectedRoute>
-            <Dashboard />
+            <DashboardPage />
           </ProtectedRoute>
         }
       />
