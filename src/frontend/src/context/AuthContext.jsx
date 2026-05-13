@@ -12,34 +12,23 @@ export function AuthProvider({ children }) {
     setError(null);
 
     try {
-      // Simular llamada al backend (delay de 1 segundo)
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const response = await fetch('http://localhost:4000/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-      // Validaciones básicas
-      if (!email || !password) {
-        throw new Error('El email y la contraseña son requeridos');
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Error en el login');
       }
 
-      if (!email.includes('@')) {
-        throw new Error('Por favor ingrese un email válido');
-      }
-
-      if (password.length < 6) {
-        throw new Error('La contraseña debe tener al menos 6 caracteres');
-      }
-
-      // Simular respuesta del servidor
-      const userData = {
-        id: '1',
-        email,
-        name: email.split('@')[0],
-        role: 'admin',
-        token: `token_${Date.now()}`
-      };
-
-      setUser(userData);
-      localStorage.setItem('user', JSON.stringify(userData));
-      return userData;
+      setUser(data.user);
+      localStorage.setItem('user', JSON.stringify(data.user));
+      return data.user;
     } catch (err) {
       setError(err.message);
       throw err;
@@ -59,36 +48,23 @@ export function AuthProvider({ children }) {
     setError(null);
 
     try {
-      // Simular llamada al backend
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const response = await fetch('http://localhost:4000/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password, confirmPassword }),
+      });
 
-      if (!email || !password || !confirmPassword) {
-        throw new Error('Todos los campos son requeridos');
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Error en el registro');
       }
 
-      if (password !== confirmPassword) {
-        throw new Error('Las contraseñas no coinciden');
-      }
-
-      if (password.length < 6) {
-        throw new Error('La contraseña debe tener al menos 6 caracteres');
-      }
-
-      if (!email.includes('@')) {
-        throw new Error('Por favor ingrese un email válido');
-      }
-
-      const userData = {
-        id: Date.now().toString(),
-        email,
-        name: email.split('@')[0],
-        role: 'user',
-        token: `token_${Date.now()}`
-      };
-
-      setUser(userData);
-      localStorage.setItem('user', JSON.stringify(userData));
-      return userData;
+      setUser(data.user);
+      localStorage.setItem('user', JSON.stringify(data.user));
+      return data.user;
     } catch (err) {
       setError(err.message);
       throw err;
