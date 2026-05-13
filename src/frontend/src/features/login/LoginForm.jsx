@@ -70,12 +70,6 @@ export function LoginForm({ onSuccess }) {
       >
         {isLoading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
       </button>
-
-      <div className="demo-credentials">
-        <p>Credenciales de demostración:</p>
-        <p>Email: demo@example.com</p>
-        <p>Contraseña: demo123</p>
-      </div>
     </form>
   );
 }

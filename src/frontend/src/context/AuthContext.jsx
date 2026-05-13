@@ -12,36 +12,6 @@ export function AuthProvider({ children }) {
     setError(null);
 
     try {
-<<<<<<< HEAD
-      // Simular llamada al backend (delay de 1 segundo)
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      // Validaciones básicas
-      if (!email || !password) {
-        throw new Error('El email y la contraseña son requeridos');
-      }
-
-      if (!email.includes('@')) {
-        throw new Error('Por favor ingrese un email válido');
-      }
-
-      if (password.length < 6) {
-        throw new Error('La contraseña debe tener al menos 6 caracteres');
-      }
-
-      // Simular respuesta del servidor
-      const userData = {
-        id: '1',
-        email,
-        name: email.split('@')[0],
-        role: 'admin',
-        token: `token_${Date.now()}`
-      };
-
-      setUser(userData);
-      localStorage.setItem('user', JSON.stringify(userData));
-      return userData;
-=======
       const response = await fetch('http://localhost:4000/api/auth/login', {
         method: 'POST',
         headers: {
@@ -59,7 +29,6 @@ export function AuthProvider({ children }) {
       setUser(data.user);
       localStorage.setItem('user', JSON.stringify(data.user));
       return data.user;
->>>>>>> origin/qa
     } catch (err) {
       setError(err.message);
       throw err;
