@@ -51,7 +51,7 @@ pipeline {
         success {
 
             mail to: 'esteban.developer18@gmail.com',
-            subject: 'Pipeline EXITOSO',
+            subject: 'SIUUU',
             body: 'La compilación terminó correctamente.'
 
             sh """
@@ -67,7 +67,7 @@ pipeline {
         failure {
 
             mail to: 'esteban.developer18@gmail.com',
-            subject: 'Pipeline FALLÓ',
+            subject: 'PIPIPI',
             body: 'La compilación presentó errores.'
 
             sh """
